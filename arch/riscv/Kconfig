@@ -726,6 +726,17 @@ config RISCV_ISA_ZACAS
 
 	  If you don't know what to do here, say Y.
 
+config RISCV_AMO_USE_ZALRSC
+	bool "Use Zalrsc extension to implement atomic functions"
+	help
+	   Kernel uses only LR/SC instructions to implement atomic functions.
+
+	   It makes sense to enable this option if your platform only
+	   implements the Zalrsc extension (a subset of the A extension),
+	   and not the complete A extension.
+
+	   If you don't know what to do here, say N.
+
 config TOOLCHAIN_HAS_ZBB
 	bool
 	default y
