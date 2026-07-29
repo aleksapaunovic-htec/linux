@@ -18,13 +18,15 @@ properties:
               - sophgo,sg2044-aclint-mtimer
           - const: thead,c900-aclint-mtimer
       - items:
+          - const: gf,mips-p8700-aclint-mtimer
+      - items:
           - enum:
               - anlogic,dr1v90-aclint-mtimer
           - const: nuclei,ux900-aclint-mtimer
 
   reg:
-    items:
-      - description: MTIMECMP Registers
+    minItems: 1
+    maxItems: 2
 
   reg-names:
     items:
@@ -39,8 +41,24 @@ additionalProperties: false
 required:
   - compatible
   - reg
-  - reg-names
   - interrupts-extended
+
+allOf:
+  - if:
+      properties:
+        compatible:
+          contains:
+            const: gf,mips-p8700-aclint-mtimer
+    then:
+      properties:
+        reg:
+          minItems: 2
+    else:
+      properties:
+        reg:
+          maxItems: 1
+      required:
+        - reg-names
 
 examples:
   - |
